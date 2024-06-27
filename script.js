@@ -1,7 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
     const productsContainer = document.getElementById('products');
+    const loginFormContainer = document.getElementById('loginFormContainer');
+    const productFormContainer = document.getElementById('productFormContainer');
+    const loginForm = document.getElementById('loginForm');
     const productForm = document.getElementById('productForm');
     const productsKey = 'farmMachines';
+    const accessCode = 'tasos82';
 
     let products = JSON.parse(localStorage.getItem(productsKey)) || [];
 
@@ -14,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <img src="${product.image}" alt="${product.name}">
                 <h2>${product.name}</h2>
                 <p>${product.description}</p>
-                <button class="delete" data-index="${index}">Delete</button>
+                <button class="delete" data-index="${index}" style="display: none;">Delete</button>
             `;
             productsContainer.appendChild(productDiv);
         });
@@ -28,6 +32,20 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     };
+
+    loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const enteredCode = document.getElementById('accessCode').value;
+        if (enteredCode === accessCode) {
+            loginFormContainer.style.display = 'none';
+            productFormContainer.style.display = 'block';
+            document.querySelectorAll('button.delete').forEach(button => {
+                button.style.display = 'block';
+            });
+        } else {
+            alert('Incorrect access code.');
+        }
+    });
 
     productForm.addEventListener('submit', function(e) {
         e.preventDefault();
