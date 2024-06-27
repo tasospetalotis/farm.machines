@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Farm Machines Catalogue</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Farm Machines Catalogue</h1>
+        <div id="productFormContainer">
+            <form id="productForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" required></textarea>
+                <label for="image">Image:</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+                <button type="submit">Add Product</button>
+            </form>
+        </div>
+        <div id="products" class="products"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
