@@ -16,3 +16,11 @@ body {
 .product img {
     max-width: 100%;
 }
+
+button.delete {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
