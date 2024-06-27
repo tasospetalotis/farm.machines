@@ -34,6 +34,7 @@ app.get('/products', (req, res) => {
 // Route to add a new product
 app.post('/add-product', upload.single('image'), (req, res) => {
     const newProduct = {
+        id: Date.now().toString(),
         name: req.body.name,
         description: req.body.description,
         image: req.file.filename
@@ -41,6 +42,14 @@ app.post('/add-product', upload.single('image'), (req, res) => {
     products.push(newProduct);
     fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2));
     res.status(201).send('Product added');
+});
+
+// Route to delete a product
+app.delete('/delete-product/:id', (req, res) => {
+    const productId = req.params.id;
+    products = products.filter(product => product.id !== productId);
+    fs.writeFileSync(productsFilePath, JSON.stringify(products, null, 2));
+    res.send('Product deleted');
 });
 
 app.listen(PORT, () => {
