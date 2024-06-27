@@ -31,17 +31,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 renderProducts();
             });
         });
+
+        // Show delete buttons if logged in
+        if (isLoggedIn()) {
+            document.querySelectorAll('button.delete').forEach(button => {
+                button.style.display = 'block';
+            });
+        }
+    };
+
+    const isLoggedIn = () => {
+        return localStorage.getItem('isLoggedIn') === 'true';
     };
 
     loginForm.addEventListener('submit', function(e) {
         e.preventDefault();
         const enteredCode = document.getElementById('accessCode').value;
         if (enteredCode === accessCode) {
+            localStorage.setItem('isLoggedIn', 'true');
             loginFormContainer.style.display = 'none';
             productFormContainer.style.display = 'block';
-            document.querySelectorAll('button.delete').forEach(button => {
-                button.style.display = 'block';
-            });
+            renderProducts(); // Render products after login
         } else {
             alert('Incorrect access code.');
         }
@@ -62,11 +72,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 localStorage.setItem(productsKey, JSON.stringify(products));
 
                 productForm.reset();
-                renderProducts();
+                renderProducts(); // Render products after adding
             };
             reader.readAsDataURL(imageFile);
         }
     });
 
+    // Initial rendering of products (in case there are existing products)
     renderProducts();
 });
