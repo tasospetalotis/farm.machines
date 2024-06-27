@@ -1,0 +1,15 @@
+{
+  "name": "farm-machines",
+  "version": "1.0.0",
+  "description": "A simple catalogue and dashboard for farm machines",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "multer": "^1.4.2"
+  },
+  "author": "",
+  "license": "ISC"
+}
